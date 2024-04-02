@@ -18,7 +18,7 @@ import jakarta.transaction.Transactional;
 public class AccountService {
 
   private final AccountRepository accountRepository;
-  
+
   @Autowired
   public AccountService(AccountRepository accountRepository) {
     this.accountRepository = accountRepository;
@@ -33,22 +33,47 @@ public class AccountService {
         throw new DuplicateObjectException();
       }
 
+      accountRepository.save(account);
+      return account;
+
     } catch (Exception exception) {
       throw new Exception();
     }
-    return null;
-    
   }
 
-  public Account loginAccount(String username, String password) {
-    return null;
+  public Account loginAccount(String username, String password) throws Exception {
+    try {
+      Optional<Account> optionalAccount = accountRepository.findByUsernameAndPassword(username, password);
+
+      if (optionalAccount.isPresent()) {
+        return optionalAccount.get();
+      } else {
+        throw new Exception();
+      }
+    } catch (Exception exception) {
+      throw new Exception();
+    }
   }
 
-  public Account updatedAccount(Account account) {
-    return null;
+  public Account updatedAccount(Account account) throws Exception {
+    try {
+      Optional<Account> optionAccount = accountRepository.findById(account.getaccount_id());
+      if (optionAccount.isPresent()) {
+        accountRepository.save(account);
+      } else {
+        throw new Exception();
+      }
+      return account;
+    } catch (Exception exception) {
+      throw new Exception();
+    }
   }
 
   public void deleteAccount(Long account_id) {
-    
+    try {
+      accountRepository.deleteById(account_id);
+    } catch (Exception exception) {
+      System.out.println(exception);
+    }
   }
 }

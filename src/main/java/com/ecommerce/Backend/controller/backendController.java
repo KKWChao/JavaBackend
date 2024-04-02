@@ -1,10 +1,11 @@
 package com.ecommerce.Backend.controller;
 
-import java.util.List;
-
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.Backend.entity.Account;
@@ -21,13 +22,24 @@ public class backendController {
 
   // Account Routing
   @PostMapping("/register")
-  public ResponseEntity<Account> registerAccount() {
-    return null;
+  public ResponseEntity<Account> registerAccount(@RequestBody Account account) {
+    try {
+      Account registerAccount = accountService.registerAccount(account);
+      return ResponseEntity.ok(registerAccount);
+    } catch (Exception exception) {
+      System.out.println(exception);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
   @PostMapping("/login")
-  public ResponseEntity<Account> loginAccount() {
-    return null;
+  public ResponseEntity<Account> loginAccount(@RequestBody Account account) {
+    try {
+      Account loginAccount = accountService.loginAccount(account.getUsername(), account.getPassword());
+      return ResponseEntity.ok(loginAccount);
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
   }
 
   // Character Routing
