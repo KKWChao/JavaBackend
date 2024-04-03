@@ -1,6 +1,5 @@
 package com.ecommerce.Backend.controller;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +11,11 @@ import com.ecommerce.Backend.entity.Account;
 import com.ecommerce.Backend.service.AccountService;
 
 @RestController
-public class backendController {
+public class BackendController {
   private AccountService accountService;
 
   @Autowired
-  public backendController(AccountService accountService) {
+  public BackendController(AccountService accountService) {
     this.accountService = accountService;
   }
 
@@ -25,7 +24,7 @@ public class backendController {
   public ResponseEntity<Account> registerAccount(@RequestBody Account account) {
     try {
       Account registerAccount = accountService.registerAccount(account);
-      return ResponseEntity.ok(registerAccount);
+      return ResponseEntity.status(HttpStatus.OK).body(registerAccount);
     } catch (Exception exception) {
       System.out.println(exception);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -43,7 +42,6 @@ public class backendController {
   }
 
   // Character Routing
-
 
   // Item Routing
 }

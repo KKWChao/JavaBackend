@@ -74,7 +74,13 @@
 		<dependency> 
 			<groupId>org.springframework.boot</groupId> 
 			<artifactId>spring-boot-starter-web</artifactId> 
-		</dependency> 
+		</dependency>
+		<!-- Lombok -->
+		<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
