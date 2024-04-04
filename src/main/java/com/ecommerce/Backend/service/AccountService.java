@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.Backend.entity.Account;
@@ -18,39 +19,36 @@ import jakarta.transaction.Transactional;
 public class AccountService {
 
   private final AccountRepository accountRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @Autowired
-  public AccountService(AccountRepository accountRepository) {
+  public AccountService(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
     this.accountRepository = accountRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
-  public Account registerAccount(Account account) throws Exception {
+  public Account registerAccount(String email, String username, String password) throws DuplicateObjectException {
 
-    try {
-      Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername());
-
-      if (optionalAccount.isPresent()) {
-        throw new DuplicateObjectException();
-      }
-
-      accountRepository.save(account);
-      return account;
-
-    } catch (Exception exception) {
-      throw new Exception();
+    if (accountRepository.findByUsername(username).isPresent()) {
+      throw new DuplicateObjectException();
     }
+
+    String hashedPassword = passwordEncoder.encode(password);
+    Account newAccount = new Account(username, email, hashedPassword);
+
+    return accountRepository.save(newAccount);
   }
 
   public Account loginAccount(String username, String password) throws Exception {
-    try {
-      Optional<Account> optionalAccount = accountRepository.findByUsernameAndPassword(username, password);
+    Optional<Account> optionalAccount = accountRepository.findByUsername(username);
 
-      if (optionalAccount.isPresent()) {
+    if (optionalAccount.isPresent()) {
+      if (passwordEncoder.matches(password, optionalAccount.get().getPassword())) {
         return optionalAccount.get();
       } else {
         throw new Exception();
       }
-    } catch (Exception exception) {
+    } else {
       throw new Exception();
     }
   }

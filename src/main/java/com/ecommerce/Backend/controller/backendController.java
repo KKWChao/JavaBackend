@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.Backend.entity.Account;
 import com.ecommerce.Backend.exception.DuplicateObjectException;
+import com.ecommerce.Backend.exception.IncorrectLoginException;
 import com.ecommerce.Backend.service.AccountService;
 
 @RestController
@@ -24,7 +25,8 @@ public class BackendController {
   @PostMapping("/register")
   public ResponseEntity<Account> registerAccount(@RequestBody Account account) {
     try {
-      Account registerAccount = accountService.registerAccount(account);
+      Account registerAccount = accountService.registerAccount(account.getEmail(), account.getUsername(),
+          account.getPassword());
       return ResponseEntity.status(HttpStatus.OK).body(registerAccount);
     } catch (DuplicateObjectException duplicateObjectException) {
       return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
@@ -37,7 +39,9 @@ public class BackendController {
   public ResponseEntity<Account> loginAccount(@RequestBody Account account) {
     try {
       Account loginAccount = accountService.loginAccount(account.getUsername(), account.getPassword());
-      return ResponseEntity.ok(loginAccount);
+      return ResponseEntity.status(HttpStatus.ACCEPTED).body(loginAccount);
+    } catch (IncorrectLoginException incorrectLoginException) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
