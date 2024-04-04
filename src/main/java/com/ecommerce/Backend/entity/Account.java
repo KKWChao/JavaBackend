@@ -1,5 +1,7 @@
 package com.ecommerce.Backend.entity;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,8 +13,8 @@ import jakarta.persistence.Table;
 @Table
 public class Account {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long account_id;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID account_id;
 
   @Column(name = "email")
   private String email;
@@ -34,11 +36,11 @@ public class Account {
   }
 
   // getters and setters
-  public long getaccount_id() {
+  public UUID getaccount_id() {
     return account_id;
   }
 
-  public void setAccoundId(long account_id) {
+  public void setAccoundId(UUID account_id) {
     this.account_id = account_id;
   }
 

@@ -1,8 +1,7 @@
 package com.ecommerce.Backend.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.Backend.entity.Account;
 import com.ecommerce.Backend.exception.DuplicateObjectException;
+import com.ecommerce.Backend.exception.IncorrectLoginException;
 import com.ecommerce.Backend.repository.AccountRepository;
 
 import jakarta.transaction.Transactional;
@@ -34,44 +34,39 @@ public class AccountService {
     }
 
     String hashedPassword = passwordEncoder.encode(password);
-    Account newAccount = new Account(username, email, hashedPassword);
+    Account newAccount = new Account(email, username, hashedPassword);
 
     return accountRepository.save(newAccount);
   }
 
-  public Account loginAccount(String username, String password) throws Exception {
+  public Account loginAccount(String username, String password) throws IncorrectLoginException, Exception {
     Optional<Account> optionalAccount = accountRepository.findByUsername(username);
 
-    if (optionalAccount.isPresent()) {
-      if (passwordEncoder.matches(password, optionalAccount.get().getPassword())) {
-        return optionalAccount.get();
-      } else {
-        throw new Exception();
-      }
-    } else {
+    if (!optionalAccount.isPresent()) {
       throw new Exception();
+    }
+
+    if (passwordEncoder.matches(password, optionalAccount.get().getPassword())) {
+      return optionalAccount.get();
+    } else {
+      throw new IncorrectLoginException();
     }
   }
 
   public Account updatedAccount(Account account) throws Exception {
-    try {
-      Optional<Account> optionAccount = accountRepository.findById(account.getaccount_id());
-      if (optionAccount.isPresent()) {
-        accountRepository.save(account);
-      } else {
-        throw new Exception();
-      }
-      return account;
-    } catch (Exception exception) {
+
+    Optional<Account> optionAccount = accountRepository.findById(account.getaccount_id());
+
+    if (optionAccount.isPresent()) {
+      accountRepository.save(account);
+    } else {
       throw new Exception();
     }
+
+    return account;
   }
 
-  public void deleteAccount(Long account_id) {
-    try {
-      accountRepository.deleteById(account_id);
-    } catch (Exception exception) {
-      System.out.println(exception);
-    }
+  public void deleteAccount(UUID account_id) {
+    accountRepository.deleteById(account_id);
   }
 }

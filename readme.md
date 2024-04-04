@@ -50,3 +50,7 @@
 2. Create the Service
 3. Create the Repository
 4. Create the Controller
+
+### Notes
+
+Need to create unit tests then integration tests during each entity/service/controller creation

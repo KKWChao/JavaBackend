@@ -23,27 +23,27 @@ public class BackendController {
 
   // Account Routing
   @PostMapping("/register")
-  public ResponseEntity<Account> registerAccount(@RequestBody Account account) {
+  public ResponseEntity<?> registerAccount(@RequestBody Account account) {
     try {
       Account registerAccount = accountService.registerAccount(account.getEmail(), account.getUsername(),
           account.getPassword());
       return ResponseEntity.status(HttpStatus.OK).body(registerAccount);
     } catch (DuplicateObjectException duplicateObjectException) {
-      return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+      return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("User already Exists");
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Client Error");
     }
   }
 
   @PostMapping("/login")
-  public ResponseEntity<Account> loginAccount(@RequestBody Account account) {
+  public ResponseEntity<?> loginAccount(@RequestBody Account account) {
     try {
       Account loginAccount = accountService.loginAccount(account.getUsername(), account.getPassword());
       return ResponseEntity.status(HttpStatus.ACCEPTED).body(loginAccount);
     } catch (IncorrectLoginException incorrectLoginException) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect Login");
     } catch (Exception exception) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Client Error");
     }
   }
 
