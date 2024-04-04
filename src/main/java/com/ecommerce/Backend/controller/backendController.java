@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.Backend.entity.Account;
+import com.ecommerce.Backend.exception.DuplicateObjectException;
 import com.ecommerce.Backend.service.AccountService;
 
 @RestController
@@ -25,8 +26,9 @@ public class BackendController {
     try {
       Account registerAccount = accountService.registerAccount(account);
       return ResponseEntity.status(HttpStatus.OK).body(registerAccount);
+    } catch (DuplicateObjectException duplicateObjectException) {
+      return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
     } catch (Exception exception) {
-      System.out.println(exception);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
