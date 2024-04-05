@@ -22,7 +22,7 @@ import com.ecommerce.Backend.service.AccountService;
 @WebMvcTest
 public class RegisterTests {
   private final AccountService accountService = mock(AccountService.class);
-  private final BackendController backendController = new BackendController(accountService);
+  private final BackendController backendController = new BackendController(accountService, null);
 
   @Test
   public void testRegisterAccount_Success() throws DuplicateObjectException {

@@ -4,7 +4,7 @@
 
 - Account
 
-  - long account_id
+  - UUID account_id
   - String email
   - String username
   - String password
@@ -12,7 +12,7 @@
 
 - Character (Abstract)
 
-  - long character_id
+  - UUID character_id
   - int hp
   - int mp
   - int atk
@@ -28,6 +28,7 @@
 
 - Items (Abstract)
 
+  - UUID item_Id
   - String type
   - int rarity
   - String ability
