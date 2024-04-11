@@ -38,7 +38,7 @@ public class LoginTests {
         // Arrange
         String username = "username";
         String password = "password";
-        String hashedPassword = "$2a$10$..."; // Mocked hashed password
+        String hashedPassword = "$2a$10$";
         Account account = new Account(username, "email@example.com", hashedPassword);
         when(accountRepository.findByUsername(username)).thenReturn(Optional.of(account));
         when(passwordEncoder.matches(password, hashedPassword)).thenReturn(true);

@@ -37,7 +37,6 @@ public class ItemService {
     }
 
     return optionalItem.get();
-
   }
 
   public Item addItem(String name, String type, int rarity) {

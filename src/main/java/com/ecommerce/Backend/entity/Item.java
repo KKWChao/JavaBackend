@@ -42,6 +42,10 @@ public class Item extends ItemAbstract {
     return id;
   }
 
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
   public String getName() {
     return name;
   }
@@ -69,6 +73,6 @@ public class Item extends ItemAbstract {
   /* OVERRIDES */
   @Override
   public String toString() {
-    return String.format("%f (name: %s, test: %s)", id, name, type);
+    return String.format("%s (name: %s, test: %s)", id, name, type);
   }
 }
