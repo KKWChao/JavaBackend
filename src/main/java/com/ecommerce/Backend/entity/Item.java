@@ -9,8 +9,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
+@ToString
 @Entity
 @Table
 public class Item extends ItemAbstract {
@@ -36,43 +45,52 @@ public class Item extends ItemAbstract {
   @Column(name = "rarity")
   private int rarity;
 
+  @Column(name = "ability")
+  private String ability;
+
+  @Column(name = "use")
+  private String use;
+
+  @Column(name = "special")
+  private String special;
+
   /* GETTERS AND SETTERS */
 
-  public UUID getId() {
-    return id;
-  }
+  // public UUID getId() {
+  // return id;
+  // }
 
-  public void setId(UUID id) {
-    this.id = id;
-  }
+  // public void setId(UUID id) {
+  // this.id = id;
+  // }
 
-  public String getName() {
-    return name;
-  }
+  // public String getName() {
+  // return name;
+  // }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+  // public void setName(String name) {
+  // this.name = name;
+  // }
 
-  public String getType() {
-    return type;
-  }
+  // public String getType() {
+  // return type;
+  // }
 
-  public void setType(String type) {
-    this.type = type;
-  }
+  // public void setType(String type) {
+  // this.type = type;
+  // }
 
-  public int getRarity() {
-    return rarity;
-  }
+  // public int getRarity() {
+  // return rarity;
+  // }
 
-  public void setRarity(int rarity) {
-    this.rarity = rarity;
-  }
+  // public void setRarity(int rarity) {
+  // this.rarity = rarity;
+  // }
 
   /* OVERRIDES */
-  @Override
-  public String toString() {
-    return String.format("%s (name: %s, test: %s)", id, name, type);
-  }
+  // @Override
+  // public String toString() {
+  // return String.format("%s (name: %s, test: %s)", id, name, type);
+  // }
 }

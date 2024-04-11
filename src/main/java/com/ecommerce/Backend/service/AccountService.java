@@ -55,7 +55,7 @@ public class AccountService {
 
   public Account updatedAccount(Account account) throws Exception {
 
-    Optional<Account> optionAccount = accountRepository.findById(account.getaccount_id());
+    Optional<Account> optionAccount = accountRepository.findById(account.getAccount_id());
 
     if (optionAccount.isPresent()) {
       accountRepository.save(account);
