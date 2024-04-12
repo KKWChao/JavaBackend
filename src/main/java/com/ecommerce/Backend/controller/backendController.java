@@ -20,19 +20,23 @@ import com.ecommerce.Backend.exception.DuplicateObjectException;
 import com.ecommerce.Backend.exception.IncorrectLoginException;
 import com.ecommerce.Backend.service.AccountService;
 import com.ecommerce.Backend.service.ItemService;
+import com.ecommerce.Backend.service.UserCharacterService;
 
 @RestController
 public class BackendController {
   private AccountService accountService;
   private ItemService itemService;
+  private UserCharacterService userCharacterService;
 
   @Autowired
-  public BackendController(AccountService accountService, ItemService itemService) {
+  public BackendController(AccountService accountService, ItemService itemService,
+      UserCharacterService userCharacterService) {
     this.accountService = accountService;
     this.itemService = itemService;
+    this.userCharacterService = userCharacterService;
   }
 
-  /* Account Routing */
+  /* ACCOUNT ROUTES */
   @PostMapping("/register")
   public ResponseEntity<?> registerAccount(@RequestBody Account account) {
     try {
@@ -58,9 +62,7 @@ public class BackendController {
     }
   }
 
-  /* Character Routing */
-
-  /* Item Routing */
+  /* ITEM ROUTERS */
   @GetMapping("/items")
   public ResponseEntity<?> getItems() {
     try {
@@ -107,4 +109,15 @@ public class BackendController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
   }
+
+  /* CHARACTER ROUTES */
+  @GetMapping("/characters")
+  public ResponseEntity<?> getAllCharacters() {
+    try {
+      return ResponseEntity.status(HttpStatus.OK).body(userCharacterService.getAllCharacters());
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+  }
+
 }

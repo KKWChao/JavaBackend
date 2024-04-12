@@ -61,11 +61,11 @@ public class UserCharacter extends CharacterObject {
   @Column(name = "dexterity")
   private int dexterity;
 
-  @NonNull
-  @ManyToOne
-  private Account account;
+  // @NonNull
+  // @ManyToOne
+  // private Account account;
 
-  @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
-  private List<Item> items;
+  // @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
+  // private List<Item> items;
 
 }
