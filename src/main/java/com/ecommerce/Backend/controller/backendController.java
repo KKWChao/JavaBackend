@@ -120,4 +120,12 @@ public class BackendController {
     }
   }
 
+  @GetMapping("/characters/{id}")
+  public ResponseEntity<?> getCharacter(@NonNull @PathVariable UUID character_id) {
+    try {
+      return ResponseEntity.status(HttpStatus.OK).body(userCharacterService.getCharacterById(character_id));
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
+  }
 }
