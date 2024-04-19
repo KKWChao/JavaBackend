@@ -36,6 +36,15 @@ public class Item extends ItemAbstract {
     this.rarity = rarity;
   }
 
+  public Item(String name, String type, int rarity, String ability, String use, String special) {
+    this.name = name;
+    this.type = type;
+    this.rarity = rarity;
+    this.ability = ability;
+    this.use = use;
+    this.special = special;
+  }
+
   @Column(name = "name")
   private String name;
 
