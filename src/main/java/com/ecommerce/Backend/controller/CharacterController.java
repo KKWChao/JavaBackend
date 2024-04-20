@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ecommerce.Backend.entity.UserCharacter;
+// import com.ecommerce.Backend.entity.UserCharacter;
+import com.ecommerce.Backend.payload.UserCharacterPayload;
 import com.ecommerce.Backend.service.UserCharacterService;
 
 import lombok.NonNull;
@@ -40,12 +41,14 @@ public class CharacterController {
   }
 
   @PostMapping("/character")
-  public ResponseEntity<?> createCharacter(@RequestBody UserCharacter userCharacter) {
+  public ResponseEntity<?> createCharacter(@RequestBody UserCharacterPayload userCharacterPayload) {
     try {
       return ResponseEntity.status(HttpStatus.OK)
-          .body(userCharacterService.addUserCharacter(userCharacter.getCharacter_name()));
+          .body(userCharacterService.addUserCharacter(userCharacterPayload.getCharacter_name(),
+              userCharacterPayload.getAccount_id()));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
   }
+
 }

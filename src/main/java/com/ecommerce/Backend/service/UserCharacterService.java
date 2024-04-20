@@ -33,8 +33,8 @@ public class UserCharacterService {
     return optionalUserCharacter.get();
   }
 
-  public UserCharacter addUserCharacter(String character_name) {
-    UserCharacter newUserCharacter = new UserCharacter(character_name);
+  public UserCharacter addUserCharacter(String character_name, String account_id) {
+    UserCharacter newUserCharacter = new UserCharacter(character_name, account_id);
     return userCharacterRepository.save(newUserCharacter);
   }
 }

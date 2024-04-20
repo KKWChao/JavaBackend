@@ -50,39 +50,4 @@ public class BackendController {
     }
   }
 
-  /* CHARACTER ROUTES */
-  // @GetMapping("/characters")
-  // public ResponseEntity<?> getAllCharacters() {
-  // try {
-  // return
-  // ResponseEntity.status(HttpStatus.OK).body(userCharacterService.getAllCharacters());
-  // } catch (Exception exception) {
-  // return
-  // ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
-  // }
-  // }
-
-  // @GetMapping("/characters/{id}")
-  // public ResponseEntity<?> getCharacter(@NonNull @PathVariable UUID
-  // character_id) {
-  // try {
-  // return
-  // ResponseEntity.status(HttpStatus.OK).body(userCharacterService.getCharacterById(character_id));
-  // } catch (Exception exception) {
-  // return
-  // ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
-  // }
-  // }
-
-  // @PostMapping("/character")
-  // public ResponseEntity<?> createCharacter(@RequestBody UserCharacter
-  // userCharacter) {
-  // try {
-  // return ResponseEntity.status(HttpStatus.OK)
-  // .body(userCharacterService.addUserCharacter(userCharacter.getCharacter_name()));
-  // } catch (Exception exception) {
-  // return
-  // ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
-  // }
-  // }
 }

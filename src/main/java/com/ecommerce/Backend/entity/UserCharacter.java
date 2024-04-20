@@ -2,17 +2,13 @@ package com.ecommerce.Backend.entity;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.ecommerce.Backend.entity.abstractions.CharacterObject;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -24,34 +20,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "characters")
 public class UserCharacter extends CharacterObject {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID character_id;
-
-  public UserCharacter() {
-  }
-
-  public UserCharacter(String character_name) {
-    this.character_name = character_name;
-  }
-
-  public UserCharacter(String character_name, int character_state, int hit_points, int mana, int attack,
-      int magic_attack, int defense, int magic_defense, int strength, int intelligence, int luck, int dexterity) {
-    this.character_name = character_name;
-    this.character_state = character_state;
-    this.hit_points = hit_points;
-    this.mana = mana;
-    this.attack = attack;
-    this.magic_attack = magic_attack;
-    this.defense = defense;
-    this.magic_defense = magic_defense;
-    this.strength = strength;
-    this.intelligence = intelligence;
-    this.luck = luck;
-    this.dexterity = dexterity;
-  }
 
   @Column(name = "character_name")
   private String character_name;
@@ -88,6 +61,33 @@ public class UserCharacter extends CharacterObject {
 
   @Column(name = "dexterity")
   private int dexterity;
+
+  @Column(name = "account_id")
+  private String account_id;
+
+  public UserCharacter() {
+  }
+
+  public UserCharacter(String character_name, String account_id) {
+    this.character_name = character_name;
+    this.account_id = account_id;
+  }
+
+  public UserCharacter(String character_name, int character_state, int hit_points, int mana, int attack,
+      int magic_attack, int defense, int magic_defense, int strength, int intelligence, int luck, int dexterity) {
+    this.character_name = character_name;
+    this.character_state = character_state;
+    this.hit_points = hit_points;
+    this.mana = mana;
+    this.attack = attack;
+    this.magic_attack = magic_attack;
+    this.defense = defense;
+    this.magic_defense = magic_defense;
+    this.strength = strength;
+    this.intelligence = intelligence;
+    this.luck = luck;
+    this.dexterity = dexterity;
+  }
 
   // @NonNull
   // @ManyToOne
