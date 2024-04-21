@@ -4,31 +4,21 @@ import java.util.UUID;
 
 import com.ecommerce.Backend.entity.abstractions.ItemAbstract;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@Entity
-@Table
+@EqualsAndHashCode(callSuper = false)
+@Table(name = "items")
 public class Item extends ItemAbstract {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
-
-  public Item() {
-  }
 
   public Item(String name, String type, int rarity) {
     this.name = name;
@@ -63,43 +53,4 @@ public class Item extends ItemAbstract {
   @Column(name = "special")
   private String special;
 
-  /* GETTERS AND SETTERS */
-
-  // public UUID getId() {
-  // return id;
-  // }
-
-  // public void setId(UUID id) {
-  // this.id = id;
-  // }
-
-  // public String getName() {
-  // return name;
-  // }
-
-  // public void setName(String name) {
-  // this.name = name;
-  // }
-
-  // public String getType() {
-  // return type;
-  // }
-
-  // public void setType(String type) {
-  // this.type = type;
-  // }
-
-  // public int getRarity() {
-  // return rarity;
-  // }
-
-  // public void setRarity(int rarity) {
-  // this.rarity = rarity;
-  // }
-
-  /* OVERRIDES */
-  // @Override
-  // public String toString() {
-  // return String.format("%s (name: %s, test: %s)", id, name, type);
-  // }
 }

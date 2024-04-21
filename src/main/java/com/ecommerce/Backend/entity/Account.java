@@ -1,26 +1,24 @@
 package com.ecommerce.Backend.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(callSuper = false)
-@Entity
+@NoArgsConstructor
+@ToString(exclude = "characters")
+@EqualsAndHashCode(callSuper = false, exclude = "characters")
 @Table(name = "accounts")
 public class Account {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID account_id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private UUID id;
 
   @Column(name = "email", nullable = false, unique = true)
   private String email;
@@ -31,13 +29,8 @@ public class Account {
   @Column(name = "password", nullable = false)
   private String password;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "character_ids", referencedColumnName = "account_id")
-  private Set<UserCharacter> character_id;
-
-  // constructors
-  public Account() {
-  }
+  @OneToMany(mappedBy = "account_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  private List<UserCharacter> characters = new ArrayList<>();
 
   public Account(String email, String username, String password) {
     this.email = email;

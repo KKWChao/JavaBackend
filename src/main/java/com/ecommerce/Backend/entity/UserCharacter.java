@@ -1,33 +1,38 @@
 package com.ecommerce.Backend.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import com.ecommerce.Backend.entity.abstractions.CharacterObject;
 
 import jakarta.persistence.*;
+import lombok.*;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
-
-@EqualsAndHashCode(callSuper = false)
-@ToString
+@Entity
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "characters")
 public class UserCharacter extends CharacterObject {
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID character_id;
 
-  @Column(name = "character_name")
+  public UserCharacter(String character_name, UUID account_id) {
+    this.character_name = character_name;
+    this.account_id = account_id;
+  }
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private UUID id;
+
+  @Column(name = "character_name", unique = true)
   private String character_name;
+
+  @Column(name = "account_id")
+  private UUID account_id;
 
   @Column(name = "character_state")
   private int character_state;
@@ -56,44 +61,12 @@ public class UserCharacter extends CharacterObject {
   @Column(name = "intelligence")
   private int intelligence;
 
-  @Column(name = "luck")
-  private int luck;
-
   @Column(name = "dexterity")
   private int dexterity;
 
-  @Column(name = "account_id")
-  private String account_id;
+  @Column(name = "luck")
+  private int luck;
 
-  public UserCharacter() {
-  }
-
-  public UserCharacter(String character_name, String account_id) {
-    this.character_name = character_name;
-    this.account_id = account_id;
-  }
-
-  public UserCharacter(String character_name, int character_state, int hit_points, int mana, int attack,
-      int magic_attack, int defense, int magic_defense, int strength, int intelligence, int luck, int dexterity) {
-    this.character_name = character_name;
-    this.character_state = character_state;
-    this.hit_points = hit_points;
-    this.mana = mana;
-    this.attack = attack;
-    this.magic_attack = magic_attack;
-    this.defense = defense;
-    this.magic_defense = magic_defense;
-    this.strength = strength;
-    this.intelligence = intelligence;
-    this.luck = luck;
-    this.dexterity = dexterity;
-  }
-
-  // @NonNull
-  // @ManyToOne
-  // private Account account;
-
-  // @OneToMany(mappedBy = "character", cascade = CascadeType.ALL)
-  // private List<Item> items;
-
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+  private List<Item> backpack = new ArrayList<>();
 }

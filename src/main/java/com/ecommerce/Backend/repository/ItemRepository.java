@@ -11,6 +11,6 @@ import com.ecommerce.Backend.entity.Item;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, UUID> {
-  @NonNull
-  Optional<Item> findById(@NonNull UUID id);
+  // @NonNull
+  // Optional<Item> findById(@NonNull UUID id);
 }
