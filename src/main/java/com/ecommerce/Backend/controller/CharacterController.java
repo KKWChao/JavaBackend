@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ecommerce.Backend.entity.UserCharacter;
 import com.ecommerce.Backend.payload.UserCharacterPayload;
 import com.ecommerce.Backend.service.UserCharacterService;
 
@@ -54,7 +53,6 @@ public class CharacterController {
   public ResponseEntity<?> updateCharater(@PathVariable UUID character_id,
       @RequestBody Map<String, Object> userCharacter) {
     try {
-
       return ResponseEntity.status(HttpStatus.OK)
           .body(userCharacterService.updateUserCharacter(character_id, userCharacter));
     } catch (Exception exception) {
