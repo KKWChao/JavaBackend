@@ -10,20 +10,21 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class CharacterBackpackController {
+@RequestMapping("/character/{character_id}")
+public class InventoryController {
   private UserCharacterService userCharacterService;
   private ItemService itemService;
 
   @Autowired
-  public CharacterBackpackController(UserCharacterService userCharacterService, ItemService itemService) {
+  public InventoryController(UserCharacterService userCharacterService, ItemService itemService) {
     this.userCharacterService = userCharacterService;
     this.itemService = itemService;
   }
 
-  @GetMapping("/character/{character_id}/backpack")
-  public ResponseEntity<?> getItems() {
+  @GetMapping("/inventory")
+  public ResponseEntity<?> getItems(@PathVariable Long character_id) {
     try {
-      return ResponseEntity.status(HttpStatus.OK).body(itemService.getItems());
+      return ResponseEntity.status(HttpStatus.OK).body(itemService.getUserCharacterItems(character_id));
     } catch (Exception exception) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
     }

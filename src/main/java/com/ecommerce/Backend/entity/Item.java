@@ -1,7 +1,5 @@
 package com.ecommerce.Backend.entity;
 
-import java.util.UUID;
-
 import com.ecommerce.Backend.entity.abstractions.ItemAbstract;
 
 import jakarta.persistence.*;
@@ -14,11 +12,10 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "items")
 public class Item extends ItemAbstract {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   public Item(String name, String type, int rarity) {
     this.name = name;

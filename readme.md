@@ -12,7 +12,7 @@
 
 - Character (Abstract)
 
-  - UUID character_id
+  - Long character_id
   - int hp
   - int mp
   - int atk
@@ -23,18 +23,23 @@
   - int int
   - int luck
   - int dex
-  - List(long itemId) foreign key [many to one]
-  - long account_id (foreign key) []
+  - List(long inventoryitem) foreign key [many to one]
+
+- InventoryItem
+
+  - Embedded Id
+    - Long inventory_id
+    - Long item_id
+  - quantity
 
 - Items (Abstract)
 
-  - UUID item_Id
+  - Long item_Id
   - String type
   - int rarity
   - String ability
   - String use
   - String special
-  - long character_id (foreign key)
 
 - Weapon implements Item
 - Potion implements Item

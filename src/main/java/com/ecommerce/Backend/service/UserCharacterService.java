@@ -28,7 +28,7 @@ public class UserCharacterService {
     return userCharacterRepository.findAll();
   }
 
-  public UserCharacter getCharacterById(UUID character_id) throws Exception {
+  public UserCharacter getCharacterById(Long character_id) throws Exception {
     Optional<UserCharacter> optionalUserCharacter = userCharacterRepository.findById(character_id);
 
     if (!optionalUserCharacter.isPresent()) {
@@ -49,7 +49,7 @@ public class UserCharacterService {
     return userCharacterRepository.save(newUserCharacter);
   }
 
-  public UserCharacter updateUserCharacter(UUID character_id, Map<String, Object> userCharacterUpdates)
+  public UserCharacter updateUserCharacter(Long character_id, Map<String, Object> userCharacterUpdates)
       throws Exception {
     Optional<UserCharacter> optionalUserCharacter = userCharacterRepository.findById(character_id);
 
@@ -104,7 +104,7 @@ public class UserCharacterService {
     return userCharacterRepository.save(existingUserCharacter);
   }
 
-  public void deleteUserCharacter(UUID character_id) throws Exception {
+  public void deleteUserCharacter(Long character_id) throws Exception {
     Optional<UserCharacter> optionalCharacter = userCharacterRepository.findById(character_id);
 
     if (!optionalCharacter.isPresent()) {

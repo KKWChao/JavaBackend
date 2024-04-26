@@ -1,7 +1,5 @@
 package com.ecommerce.Backend.controller;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +30,7 @@ public class ItemController {
   }
 
   @GetMapping("/items/{item_id}")
-  public ResponseEntity<?> getItem(@NonNull @PathVariable UUID item_id) {
+  public ResponseEntity<?> getItem(@NonNull @PathVariable Long item_id) {
     try {
       return ResponseEntity.status(HttpStatus.OK).body(itemService.getItemById(item_id));
     } catch (Exception exception) {
@@ -51,7 +49,7 @@ public class ItemController {
   }
 
   @PatchMapping("/items/{item_id}")
-  public ResponseEntity<?> patchItem(@NonNull @PathVariable UUID item_id, @RequestBody Item item) {
+  public ResponseEntity<?> patchItem(@NonNull @PathVariable Long item_id, @RequestBody Item item) {
     try {
       return ResponseEntity.status(HttpStatus.OK).body(itemService.updateItem(item_id, item));
     } catch (Exception exception) {
@@ -60,7 +58,7 @@ public class ItemController {
   }
 
   @DeleteMapping("/item/{item_id}")
-  public ResponseEntity<?> deleteItem(@NonNull @PathVariable UUID item_id) {
+  public ResponseEntity<?> deleteItem(@NonNull @PathVariable Long item_id) {
     try {
       itemService.deleteItemById(item_id);
       return ResponseEntity.status(HttpStatus.ACCEPTED).body("Item Deleted");

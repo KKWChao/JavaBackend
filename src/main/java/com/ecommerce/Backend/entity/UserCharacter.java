@@ -16,7 +16,6 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "characters")
 public class UserCharacter extends CharacterObject {
 
   public UserCharacter(String character_name, UUID account_id) {
@@ -25,8 +24,8 @@ public class UserCharacter extends CharacterObject {
   }
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(name = "character_name", unique = true)
   private String character_name;
@@ -68,5 +67,6 @@ public class UserCharacter extends CharacterObject {
   private int luck;
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-  private List<Item> backpack = new ArrayList<>();
+  @JoinColumn(name = "inventory_id")
+  private List<InventoryItems> inventory = new ArrayList<>();
 }

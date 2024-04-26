@@ -12,7 +12,7 @@ import com.ecommerce.Backend.service.AccountService;
 
 @RestController
 public class BackendController {
-  private AccountService accountService;
+  private final AccountService accountService;
   private final CharacterController characterController;
   private final ItemController itemController;
 
