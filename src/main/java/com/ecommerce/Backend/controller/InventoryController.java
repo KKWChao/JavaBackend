@@ -29,4 +29,49 @@ public class InventoryController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
     }
   }
+
+  @GetMapping("/inventory/{item_id}")
+  public ResponseEntity<?> getItem(@PathVariable Long character_id, @PathVariable Long item_id) {
+    try {
+      return null;
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+    }
+  }
+
+  @PostMapping("/inventory")
+  public ResponseEntity<?> addItem(@PathVariable Long character_id) {
+    try {
+      return null;
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+    }
+  }
+
+  @PutMapping("/inventory/{item_id}")
+  public ResponseEntity<?> changeItem(@PathVariable Long character_id, @PathVariable Long item_id) {
+    try {
+      return null;
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+    }
+  }
+
+  @PatchMapping("/inventory/{item_id}")
+  public ResponseEntity<?> updateItem(@PathVariable Long character_id, @PathVariable Long item_id) {
+    try {
+      return null;
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+    }
+  }
+
+  @DeleteMapping("/inventory/{item_id}")
+  public ResponseEntity<?> removeItem(@PathVariable Long character_id, @PathVariable Long item_id) {
+    try {
+      return null;
+    } catch (Exception exception) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+    }
+  }
 }

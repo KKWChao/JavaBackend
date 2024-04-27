@@ -16,6 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@Table(name = "UserCharacters")
 public class UserCharacter extends CharacterObject {
 
   public UserCharacter(String character_name, UUID account_id) {

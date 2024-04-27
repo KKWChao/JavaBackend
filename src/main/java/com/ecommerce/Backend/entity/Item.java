@@ -12,6 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = false)
+@Table(name = "Item")
 public class Item extends ItemAbstract {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

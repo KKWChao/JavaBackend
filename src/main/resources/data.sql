@@ -1,3 +1,1 @@
-DROP TABLE IF EXISTS accounts;
-DROP TABLE IF EXISTS characters;
-DROP TABLE IF EXISTS items;
+INSERT INTO accounts (id, email, username, password) VALUES (UUID(), 'test@test.com', 'tester', 'test123');
