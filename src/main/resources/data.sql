@@ -1,1 +1,1 @@
-INSERT INTO accounts (id, email, username, password) VALUES (UUID(), 'test@test.com', 'tester', 'test123');
+INSERT INTO accounts (id, email, username, password) VALUES (UUID(), 'test@test.com', 'tester', '$2a$10$OWBWSA5s7Wkpam4Z4xP/puf8lF7KrRbexl0mzSRsEcNrwmKcCKNne');

@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS accounts;
-DROP TABLE IF EXISTS UserCharacters;
-DROP TABLE IF EXISTS Items;
-DROP TABLE IF EXISTS InventoryItems;
+DROP TABLE IF EXISTS user_characters;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS inventory_items;
 
 CREATE TABLE accounts (
   id UUID PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE accounts (
   password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE UserCharacters (
+CREATE TABLE user_characters (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   character_name VARCHAR(255) UNIQUE NOT NULL,
   account_id UUID NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE UserCharacters (
   luck INT
 );
 
-CREATE TABLE Items (
+CREATE TABLE items (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL,
@@ -37,16 +37,16 @@ CREATE TABLE Items (
   special VARCHAR(255)
 );
 
-ALTER TABLE UserCharacters ADD CONSTRAINT fk_account_id
+ALTER TABLE user_characters ADD CONSTRAINT fk_account_id
   FOREIGN KEY (account_id)
   REFERENCES accounts (id);
 
-CREATE TABLE InventoryItems (
+CREATE TABLE inventory_items (
   inventory_id BIGINT AUTO_INCREMENT PRIMARY KEY,
   character_id BIGINT,
   item_id BIGINT,
   quantity INT,
-  FOREIGN KEY (character_id) REFERENCES UserCharacters(id),
-  FOREIGN KEY (item_id) REFERENCES Items(id)
+  FOREIGN KEY (character_id) REFERENCES user_characters(id),
+  FOREIGN KEY (item_id) REFERENCES items(id)
 );
 
